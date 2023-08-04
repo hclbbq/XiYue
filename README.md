@@ -11,10 +11,4 @@ div align="center">
 采用SpringBoot3+MybatisPlus+AntDesignVue+Vite 等更多优秀组件及前沿技术开发，注释丰富，代码简洁，开箱即用！
 
 
-<p align="center">     
-    <p align="center">
-       
-    </p>
-</p>
-
 
