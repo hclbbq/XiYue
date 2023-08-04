@@ -1,4 +1,4 @@
-div align="center">
+<div align="center">
     <p align="center">
         <img src="./snowy-admin-web/public/img/logo.png" height="150" alt="logo"/>
     </p>
