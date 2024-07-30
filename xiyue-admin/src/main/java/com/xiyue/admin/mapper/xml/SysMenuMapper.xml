@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiyue.admin.mapper.SysMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiyue.admin.entity.SysMenu">
+        <id column="id" property="id" />
+        <id column="code" property="code" />
+        <result column="sys_id" property="sysId" />
+        <result column="pid" property="pid" />
+        <result column="title" property="title" />
+        <result column="url" property="url" />
+        <result column="icon" property="icon" />
+        <result column="type" property="type" />
+        <result column="ord" property="ord" />
+        <result column="status" property="status" />
+        <result column="tier" property="tier" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sys_id, pid, title, url, icon, code, type, ord, status, tier, DELETE_FLAG, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER
+    </sql>
+
+</mapper>

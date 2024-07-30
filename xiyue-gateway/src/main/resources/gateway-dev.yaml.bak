@@ -1,0 +1,87 @@
+server:
+  port: 8070
+
+  #servlet:
+  #context-path: /${spring.application.name}
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.78:8849
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          #filters:
+          #  - PreserveHostHeader
+      #routes: # 配置路由路径
+            #  - id: management # 认证中心
+            #    uri: lb://management
+            #    predicates:
+            #      - Path=management/**
+            #    filters:
+            #     - StripPrefix=1
+            # - id: test  #  产品模块
+            #    uri: lb://test
+            #   predicates:
+            #    - Path=/test/**
+            #  filters:
+            #    - StripPrefix=1
+
+
+
+  # redis 相关配置
+  data:
+    redis:
+      # Redis数据库索引（默认为0）
+      database: 1
+      # Redis服务器地址
+      host: 192.168.1.78
+      # Redis服务器连接端口
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      # password:
+      # 连接超时时间
+      timeout: 10s
+      jedis:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
+
+
+sa-token:
+  # token 的名称 同时也是cookie 名称
+  token-name: satoken
+  # token 的有效期 单位s 默认为30天, -1代表永不过期
+  timeout: 2592000
+  # token 临时有效期(指定时间内无操作或者视为token过期) 单位 秒
+  active-timeout:  -1
+  # 是否允许同一账号并发登录（为true 时允许一起登录, 为false 时新登录时挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时, 是否共用同一个token（为true 的时候所有登录通用同一个token,为false 时每次登录新建一个 token)
+  is-share: false
+  # token 风格
+  token-style: uuid
+  #是否关闭程序启动时的satoken打印
+  is-print: false
+
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      service-config:
+        power:
+          group-name: admin
+          order: 1
+      version: openapi3

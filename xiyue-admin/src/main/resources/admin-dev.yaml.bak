@@ -1,0 +1,100 @@
+server:
+  port: 8060
+
+  #servlet:
+    #context-path: /${spring.application.name}
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.78:8849
+
+  data:
+      # redis 相关配置
+    redis:
+      # Redis数据库索引（默认为0）
+      database: 1
+      # Redis服务器地址
+      host: 192.168.1.78
+      # Redis服务器连接端口
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      # password:
+      # 连接超时时间
+      timeout: 10s
+      jedis:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
+  # 数据库 相关配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.76:3306/stone-forest-power?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: ly666
+
+# mybatis-plus相关配置
+mybatis-plus:
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射 address_book ---> addressBook，
+    map-underscore-to-camel-case: true #fals关闭
+  mapper-locations: classpath*:com/xiyue/**/xml/*.xml
+  global-config:
+    banner: off
+    db-config:
+      id-type: auto
+      logic-delete-field: DELETE_FLAG # 全局逻辑删除的实体字段名
+      logic-delete-value: DELETED # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: NOT_DELETE # 逻辑未删除值(默认为 0)
+
+mybatis-plus-join:
+  banner: off
+
+
+sa-token:
+  # token 的名称 同时也是cookie 名称
+  token-name: satoken
+  # token 的有效期 单位s 默认为30天, -1代表永不过期
+  timeout: 2592000
+  # token 临时有效期(指定时间内无操作或者视为token过期) 单位 秒
+  active-timeout:  -1
+  # 是否允许同一账号并发登录（为true 时允许一起登录, 为false 时新登录时挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时, 是否共用同一个token（为true 的时候所有登录通用同一个token,为false 时每次登录新建一个 token)
+  is-share: false
+  # token 风格
+  token-style: uuid
+  #是否关闭程序启动时的satoken打印
+  is-print: false
+
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'admin'
+      paths-to-match: '/**'
+      packages-to-scan: com.xiyue.admin
+
+
+
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    footer-custom-content: Apache License 2.0 | Copyright  2019-[XiYue](https://)
